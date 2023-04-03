@@ -8,6 +8,7 @@ public class SvPacket {
     private String macDst;
 
     private String masSrc;
+    private String packetType;
 
     private short appID;
 
