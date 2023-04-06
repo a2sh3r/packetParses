@@ -53,26 +53,25 @@ public class SvPacket {
     }
 
     public String toString(Dataset dataset){
-        return "MAC dist: " + macDst + "\nMac source: " + masSrc +"\nPacket type: "+packetType+"\nApp Id: " +
-                Short.toString(appID) + "\nSv Id: "+svId+"\nSample count : "+Integer.toString(smpCount)+"\nConf Ref: "+
-                Integer.toString(confRef)+"\nSample Synch: "+Integer.toString(smpSynch) + "\nInst IA: " +
-                Double.toString(dataset.getInstIa())+"\nquality IA: " +
-                Integer.toString(dataset.getQIa())+"\nInst IB: " +
-                Double.toString(dataset.getInstIb())+"\nquality IB: " +
-                Integer.toString(dataset.getQIb())+"\nInst IC: " +
-                Double.toString(dataset.getInstIc())+"\nquality IC: " +
-                Integer.toString(dataset.getQIc())+"\nInst IN: " +
-                Double.toString(dataset.getInstIn())+"\nquality IN: " +
-                Integer.toString(dataset.getQIn())+"\nInst UA: " +
-                Double.toString(dataset.getInstUa())+"\nquality UA: " +
-                Integer.toString(dataset.getQUa())+"\nInst UB: " +
-                Double.toString(dataset.getInstUb())+"\nquality UB: " +
-                Integer.toString(dataset.getQUb())+"\nInst UC: " +
-                Double.toString(dataset.getInstUc())+"\nquality UC: " +
-                Integer.toString(dataset.getQUc())+"\nInst UN: " +
-                Double.toString(dataset.getInstUn())+"\nquality UN: " +
-                Integer.toString(dataset.getQUn()) + "\nKz Type : " +
-                kz;
+        return "MAC-dist:" + macDst + " Mac-source:" + masSrc +" Packet-type:"+packetType+" App-Id:" +
+                Short.toString(appID) + " Sv-Id:"+svId+" Sample-count:"+Integer.toString(smpCount)+" Conf-Ref:"+
+                Integer.toString(confRef)+" Sample-Synch:"+Integer.toString(smpSynch) + " Inst-IA:" +
+                Double.toString(dataset.getInstIa())+" quality-IA:" +
+                Integer.toString(dataset.getQIa())+" Inst-IB:" +
+                Double.toString(dataset.getInstIb())+" quality-IB:" +
+                Integer.toString(dataset.getQIb())+" Inst-IC:" +
+                Double.toString(dataset.getInstIc())+" quality-IC:" +
+                Integer.toString(dataset.getQIc())+" Inst-IN:" +
+                Double.toString(dataset.getInstIn())+" quality-IN:" +
+                Integer.toString(dataset.getQIn())+" Inst UA: " +
+                Double.toString(dataset.getInstUa())+" quality-UA:" +
+                Integer.toString(dataset.getQUa())+" Inst UB: " +
+                Double.toString(dataset.getInstUb())+" quality-UB:" +
+                Integer.toString(dataset.getQUb())+" Inst-UC:" +
+                Double.toString(dataset.getInstUc())+" quality-UC:" +
+                Integer.toString(dataset.getQUc())+" Inst-UN:"+
+                Double.toString(dataset.getInstUn())+" quality-UN:" +
+                Integer.toString(dataset.getQUn());
     }
 
 }

@@ -47,15 +47,15 @@ public class KzCalculator {
 
             }
 
-            double ustA = Math.sqrt(sumA / 200) * 2;
-            double ustB = Math.sqrt(sumB / 200) * 2;
-            double ustC = Math.sqrt(sumC / 200) * 2;
-            double ustN = Math.sqrt(sumN / 200) * 2;
+            double ustA = Math.sqrt(sumA / 200) * 2.2;
+            double ustB = Math.sqrt(sumB / 200) * 2.2;
+            double ustC = Math.sqrt(sumC / 200) * 2.2;
+            double ustN = Math.sqrt(sumN / 200) * 2.2;
 
-            double ustuA = Math.sqrt(sumuA / 200) * 2;
-            double ustuB = Math.sqrt(sumuB / 200) * 2;
-            double ustuC = Math.sqrt(sumuC / 200) * 2;
-            double ustuN = Math.sqrt(sumuN / 200) * 2;
+            double ustuA = Math.sqrt(sumuA / 200) * 2.2;
+            double ustuB = Math.sqrt(sumuB / 200) * 2.2;
+            double ustuC = Math.sqrt(sumuC / 200) * 2.2;
+            double ustuN = Math.sqrt(sumuN / 200) * 2.2;
 
             currentsNormal.add(ustA);
             currentsNormal.add(ustB);
@@ -94,35 +94,39 @@ public class KzCalculator {
 
         for (int i = 0; i < svPacketList.size(); i++) {
             String kzName ="";
-            if(svPacketList.get(i).getDataset().getInstIa() > currentsNormal.get(0))
+            var item = svPacketList.get(i).getDataset();
+            kzName = "";
+
+            if(Math.abs(item.getInstIa()) > currentsNormal.get(0))
             {
-                emergencyIa += svPacketList.get(i).getDataset().getInstIa();
-                emergencyUa += svPacketList.get(i).getDataset().getInstUa();
+                emergencyIa += Math.abs(item.getInstIa());
+                emergencyUa += Math.abs(item.getInstUa());
                 countera += 1;
                 kzName += "A";
             }
-            if(svPacketList.get(i).getDataset().getInstIb() > currentsNormal.get(1))
+            if(Math.abs(item.getInstIb()) > currentsNormal.get(1))
             {
-                emergencyIb += svPacketList.get(i).getDataset().getInstIb();
-                emergencyUb += svPacketList.get(i).getDataset().getInstUb();
+                emergencyIb += Math.abs(item.getInstIb());
+                emergencyUb += Math.abs(item.getInstUb());
                 counterb += 1;
                 kzName += "B";
             }
-            if(svPacketList.get(i).getDataset().getInstIc() > currentsNormal.get(2))
+            if(Math.abs(item.getInstIc()) > currentsNormal.get(2))
             {
-                emergencyIc += svPacketList.get(i).getDataset().getInstIc();
-                emergencyUc += svPacketList.get(i).getDataset().getInstUc();
+                emergencyIc += Math.abs(item.getInstIc());
+                emergencyUc += Math.abs(item.getInstUc());
                 counterc += 1;
                 kzName += "C";
             }
-            if(svPacketList.get(i).getDataset().getInstIn() > currentsNormal.get(3))
+            if(Math.abs(item.getInstIn()) > currentsNormal.get(3))
             {
-                emergencyIn += svPacketList.get(i).getDataset().getInstIn();
-                emergencyUn += svPacketList.get(i).getDataset().getInstUn();
+                emergencyIn += Math.abs(item.getInstIn());
+                emergencyUn += Math.abs(item.getInstUn());
                 countern += 1;
                 kzName += "N";
             }
-            kzType.add(i, kzName);
+            kzType.add(kzName);
+
         }
 
         currentsEmergency.add(emergencyIa/countera);
