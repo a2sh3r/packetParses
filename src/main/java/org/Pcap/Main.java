@@ -27,6 +27,7 @@ public class Main {
                     List<Double> normalValues = calculator.findNormal();
                     List<Double> emergencyValue = calculator.findFault(normalValues);
                     List<String> kzType = new ArrayList<>();
+                    List<String> answerTime = new ArrayList<>();
                     List<Double[]> kzTime = calculator.countKz();
                     List<String> answer = new ArrayList<>();
 
@@ -57,17 +58,18 @@ public class Main {
                         throw new RuntimeException(e);
                     }
 
-                    for(int i=0;i<12000;i++){
+                    for(int i=0;i<12000;i++) {
 
-                        var line1 = (i+1) + "-packet " + calculator.getSvPacketList().get(i).toString(calculator.getSvPacketList().get(i).getDataset());
+                        var line1 = (i + 1) + "-packet " + calculator.getSvPacketList().get(i).toString(calculator.getSvPacketList().get(i).getDataset());
                         answer.add(line1);
+                    }
+                    try {
+                        Files.write(Paths.get("packets.txt"), answer, StandardOpenOption.CREATE);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
 
-                        try {
-                            Files.write(Paths.get("packets.txt"), answer, StandardOpenOption.CREATE);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-
+                    for(int i=0;i<12000;i++) {
                         var item = calculator.getKzType().get(i);
                         if(calculator.getKzType().get(i) == "") {
                             String line = i+1 + " -  net Kz";
@@ -76,7 +78,6 @@ public class Main {
                         }
                         else {
                             String line = i+1 + " - " + calculator.getKzType().get(i);
-
                             kzType.add(line);
                         }
 
