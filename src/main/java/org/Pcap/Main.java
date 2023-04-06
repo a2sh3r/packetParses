@@ -89,6 +89,24 @@ public class Main {
                         throw new RuntimeException(e);
                     }
 
+
+                    for(int i=0;i<12000;i++) {
+                        if(i>calculator.getCounterTime()){
+                            break;
+                        }
+                        else{
+                            var answerTimeline = "Time_"+i+": "+kzTime.get(i)[0]+" first_index:"+kzTime.get(i)[1]+" second_index:"+kzTime.get(i)[0];
+                            answerTime.add(answerTimeline);
+                        }
+
+                    }
+
+                    try {
+                        Files.write(Paths.get("emergency-time.txt"), answerTime, StandardOpenOption.CREATE);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
 

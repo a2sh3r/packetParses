@@ -14,6 +14,7 @@ public class KzCalculator {
     private List<SvPacket> svPacketList = new ArrayList<SvPacket>();
     private List<String> kzType = new ArrayList<>();
 
+    private int counterTime;
 
     private Double setPoint;
     public void addPacket(SvPacket packet){
@@ -143,29 +144,33 @@ public class KzCalculator {
     }
 
     public List<Double[]> countKz(){
-        double startCounter = 0;
         double endCounter = 0;
         List<Double[]> emergencyTime = new ArrayList<>();
+        List<Integer> startCounter = new ArrayList<>();
 
 
 
         for (int i = 1; i < svPacketList.size(); i++) {
-            if((svPacketList.get(i).getKz() != "") & (svPacketList.get(i-1).getKz() == "")){
-                startCounter = i;
+            if((svPacketList.get(i).getKz() != svPacketList.get(i-1).getKz())) {
+                if (svPacketList.get(i - 1).getKz() != "") {
+                    startCounter.add(i - 1);
+                    if (svPacketList.get(i ).getKz() != "") {
+                        startCounter.add(i);
+                    }
+                } else {
+                    startCounter.add(i);
+                }
             }
-            if (((svPacketList.get(i).getKz() == "") & (svPacketList.get(i-1).getKz() != ""))){
-                endCounter = i;
+            if(i == svPacketList.size()-1 & svPacketList.get(i ).getKz() != ""){
+                startCounter.add(i);
             }
-            if (startCounter >0 & endCounter >0){
-                emergencyTime.add(new Double[] {startCounter, endCounter});
-            }
-
         }
 
-        for (int i = 0; i < emergencyTime.size(); i++) {
-            double time = (emergencyTime.get(i)[1] - emergencyTime.get(i)[0]) * 0.00025;
-            emergencyTime.set(i, new Double[] {time, emergencyTime.get(i)[0], emergencyTime.get(i)[1]});
+        for (int i = 1; i < startCounter.size(); i+=2) {
 
+            double time = (startCounter.get(i) - startCounter.get(i-1)) * 0.00025;
+            emergencyTime.add(new Double[] {time, Double.valueOf(startCounter.get(i - 1)), Double.valueOf(startCounter.get(i))});
+            counterTime += 1;
         }
 
         return emergencyTime;
