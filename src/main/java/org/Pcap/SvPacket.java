@@ -71,7 +71,8 @@ public class SvPacket {
                 Double.toString(dataset.getInstUc())+"\nquality UC: " +
                 Integer.toString(dataset.getQUc())+"\nInst UN: " +
                 Double.toString(dataset.getInstUn())+"\nquality UN: " +
-                Integer.toString(dataset.getQUn());
+                Integer.toString(dataset.getQUn()) + "\nKz Type : " +
+                kz;
     }
 
 }

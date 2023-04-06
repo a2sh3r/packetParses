@@ -12,7 +12,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 public class EthernetListener {
-    KzCalculator calculator = new KzCalculator();
 
     static{
         try {
@@ -51,18 +50,16 @@ public class EthernetListener {
                     try {
                         log.info("Starting packet capture");
                         handle.loop(0, defaultPacketListener);
-                    } catch (PcapNativeException | InterruptedException | NotOpenException e) {
+                    } catch (PcapNativeException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    } catch (NotOpenException e) {
                         throw new RuntimeException(e);
                     }
-
                     log.info("Packet capture finished");
                 });
-
                 captureThread.start();
-                System.out.println("GAdsadsadsa");
-                Thread.sleep(5000);
-                captureThread.stop();
-                System.out.println("Disabled");
             }
         }
 
@@ -70,16 +67,16 @@ public class EthernetListener {
 
     @SneakyThrows
     private void initializeNetworkInterface() {
-         Optional<PcapNetworkInterface> nic = Pcaps.findAllDevs().stream()
+        Optional<PcapNetworkInterface> nic = Pcaps.findAllDevs().stream()
                 .filter(i -> nicName.equals(i.getDescription()))
                 .findFirst();
-         if(nic.isPresent()){
+        if(nic.isPresent()){
             handle = nic.get().openLive(1500, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, 10);
             log.info("Network handler created: {}", nic);
-         }
-         else {
+        }
+        else {
             log.error("Network interface not found");
-         }
+        }
     }
 
 

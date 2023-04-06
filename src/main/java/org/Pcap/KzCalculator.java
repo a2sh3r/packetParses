@@ -155,7 +155,7 @@ public class KzCalculator {
         return currentsEmergency;
     }
 
-    public List<Double> countKz(){
+    public List<Double[]> countKz(){
         double startCounter = 0;
         double endCounter = 0;
         List<Double[]> emergencyTime = new ArrayList<>();
@@ -178,7 +178,7 @@ public class KzCalculator {
 
         }
 
-        return (List<Double>) emergencyTime;
+        return emergencyTime;
     }
 
     private double getValue(int i){
