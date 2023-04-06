@@ -91,11 +91,13 @@ public class Main {
 
 
                     for(int i=0;i<12000;i++) {
-                        if(i>calculator.getCounterTime()){
+                        if(i>calculator.getCounterTime()-1){
                             break;
                         }
                         else{
-                            var answerTimeline = "Time_"+i+": "+kzTime.get(i)[0]+" first_index:"+kzTime.get(i)[1]+" second_index:"+kzTime.get(i)[0];
+                            var answerTimeline = "Time_"+i+": "+kzTime.get(i)[0]+" first_index:"+
+                                    kzTime.get(i)[1].intValue()+" second_index:"+
+                                    kzTime.get(i)[2].intValue();
                             answerTime.add(answerTimeline);
                         }
 

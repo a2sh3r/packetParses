@@ -149,26 +149,26 @@ public class KzCalculator {
         List<Integer> startCounter = new ArrayList<>();
 
 
-
         for (int i = 1; i < svPacketList.size(); i++) {
-            if((svPacketList.get(i).getKz() != svPacketList.get(i-1).getKz())) {
-                if (svPacketList.get(i - 1).getKz() != "") {
+            if((!kzType.get(i).equals(kzType.get(i-1)))) {
+                if (!kzType.get(i-1).equals("")) {
                     startCounter.add(i - 1);
-                    if (svPacketList.get(i ).getKz() != "") {
+                    if (!kzType.get(i).equals("")) {
                         startCounter.add(i);
                     }
                 } else {
                     startCounter.add(i);
                 }
             }
-            if(i == svPacketList.size()-1 & svPacketList.get(i ).getKz() != ""){
+            if(i == kzType.size()-1 & !kzType.get(i).equals("")){
                 startCounter.add(i);
             }
         }
 
         for (int i = 1; i < startCounter.size(); i+=2) {
-
-            double time = (startCounter.get(i) - startCounter.get(i-1)) * 0.00025;
+            System.out.println("first - "+startCounter.get(i - 1));
+            System.out.println("sec - "+startCounter.get(i));
+            double time = (startCounter.get(i) - startCounter.get(i-1) +1) * 0.00025;
             emergencyTime.add(new Double[] {time, Double.valueOf(startCounter.get(i - 1)), Double.valueOf(startCounter.get(i))});
             counterTime += 1;
         }
