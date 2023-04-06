@@ -22,6 +22,8 @@ public class SvPacket {
 
     private int smpSynch;
 
+    private String kz;
+
 
     private Dataset dataset = new Dataset();
 
