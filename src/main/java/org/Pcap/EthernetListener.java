@@ -12,6 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 public class EthernetListener {
+    KzCalculator calculator = new KzCalculator();
 
     static{
         try {
@@ -50,16 +51,18 @@ public class EthernetListener {
                     try {
                         log.info("Starting packet capture");
                         handle.loop(0, defaultPacketListener);
-                    } catch (PcapNativeException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    } catch (NotOpenException e) {
+                    } catch (PcapNativeException | InterruptedException | NotOpenException e) {
                         throw new RuntimeException(e);
                     }
+
                     log.info("Packet capture finished");
                 });
+
                 captureThread.start();
+                System.out.println("GAdsadsadsa");
+                Thread.sleep(5000);
+                captureThread.stop();
+                System.out.println("Disabled");
             }
         }
 

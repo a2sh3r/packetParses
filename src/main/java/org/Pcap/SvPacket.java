@@ -3,6 +3,8 @@ package org.Pcap;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter @Getter
 public class SvPacket {
     private String macDst;
@@ -24,7 +26,7 @@ public class SvPacket {
     private Dataset dataset = new Dataset();
 
     @Setter @Getter
-    public class Dataset{
+    public static class Dataset{
         private double instIa;
         private int qIa;
         private double instIb;
@@ -44,29 +46,30 @@ public class SvPacket {
         private double instUn;
         private int qUn;
 
+        private List<Double> ustCurrent;
+
     }
 
     public String toString(Dataset dataset){
-        String answer = "MAC dist: " + macDst + "\nMac source: " + masSrc +"\nPacket type: "+packetType+"\nApp Id: " +
+        return "MAC dist: " + macDst + "\nMac source: " + masSrc +"\nPacket type: "+packetType+"\nApp Id: " +
                 Short.toString(appID) + "\nSv Id: "+svId+"\nSample count : "+Integer.toString(smpCount)+"\nConf Ref: "+
-                Integer.toString(confRef)+"\nSample Synch: "+Integer.toString(smpSynch) + "\n Inst IA: " +
-                Double.toString(dataset.getInstIa())+"\n quality IA: " +
-                Integer.toString(dataset.getQIa())+"\n Inst IB: " +
-                Double.toString(dataset.getInstIb())+"\n quality IB: " +
-                Integer.toString(dataset.getQIb())+"\n Inst IC: " +
-                Double.toString(dataset.getInstIc())+"\n quality IC: " +
-                Integer.toString(dataset.getQIc())+"\n Inst IN: " +
-                Double.toString(dataset.getInstIn())+"\n quality IN: " +
-                Integer.toString(dataset.getQIn())+"\n Inst UA: " +
-                Double.toString(dataset.getInstUa())+"\n quality UA: " +
-                Integer.toString(dataset.getQUa())+"\n Inst UB: " +
-                Double.toString(dataset.getInstUb())+"\n quality UB: " +
-                Integer.toString(dataset.getQUb())+"\n Inst UC: " +
-                Double.toString(dataset.getInstUc())+"\n quality UC: " +
-                Integer.toString(dataset.getQUc())+"\n Inst UN: " +
-                Double.toString(dataset.getInstUn())+"\n quality UN: " +
+                Integer.toString(confRef)+"\nSample Synch: "+Integer.toString(smpSynch) + "\nInst IA: " +
+                Double.toString(dataset.getInstIa())+"\nquality IA: " +
+                Integer.toString(dataset.getQIa())+"\nInst IB: " +
+                Double.toString(dataset.getInstIb())+"\nquality IB: " +
+                Integer.toString(dataset.getQIb())+"\nInst IC: " +
+                Double.toString(dataset.getInstIc())+"\nquality IC: " +
+                Integer.toString(dataset.getQIc())+"\nInst IN: " +
+                Double.toString(dataset.getInstIn())+"\nquality IN: " +
+                Integer.toString(dataset.getQIn())+"\nInst UA: " +
+                Double.toString(dataset.getInstUa())+"\nquality UA: " +
+                Integer.toString(dataset.getQUa())+"\nInst UB: " +
+                Double.toString(dataset.getInstUb())+"\nquality UB: " +
+                Integer.toString(dataset.getQUb())+"\nInst UC: " +
+                Double.toString(dataset.getInstUc())+"\nquality UC: " +
+                Integer.toString(dataset.getQUc())+"\nInst UN: " +
+                Double.toString(dataset.getInstUn())+"\nquality UN: " +
                 Integer.toString(dataset.getQUn());
-        return answer;
     }
 
 }
