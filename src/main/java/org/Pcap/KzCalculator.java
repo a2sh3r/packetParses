@@ -12,6 +12,9 @@ import java.util.function.UnaryOperator;
 public class KzCalculator {
 
     private List<SvPacket> svPacketList = new ArrayList<SvPacket>();
+    private List<String> kzType = new ArrayList<>();
+
+
     private Double setPoint;
     public void addPacket(SvPacket packet){
         svPacketList.add(packet);
@@ -81,76 +84,56 @@ public class KzCalculator {
         var emergencyUc = 0.0;
         var emergencyUn = 0.0;
 
-        var countera = 0;
-        var counterb = 0;
-        var counterc = 0;
-        var countern = 0;
+        var countera = 1;
+        var counterb = 1;
+        var counterc = 1;
+        var countern = 1;
 
-        var counterua = 0;
-        var counterub = 0;
-        var counteruc = 0;
-        var counterun = 0;
 
-        String kzName ="";
+
 
         for (int i = 0; i < svPacketList.size(); i++) {
+            String kzName ="";
             if(svPacketList.get(i).getDataset().getInstIa() > currentsNormal.get(0))
             {
                 emergencyIa += svPacketList.get(i).getDataset().getInstIa();
+                emergencyUa += svPacketList.get(i).getDataset().getInstUa();
                 countera += 1;
                 kzName += "A";
             }
             if(svPacketList.get(i).getDataset().getInstIb() > currentsNormal.get(1))
             {
                 emergencyIb += svPacketList.get(i).getDataset().getInstIb();
+                emergencyUb += svPacketList.get(i).getDataset().getInstUb();
                 counterb += 1;
                 kzName += "B";
             }
             if(svPacketList.get(i).getDataset().getInstIc() > currentsNormal.get(2))
             {
                 emergencyIc += svPacketList.get(i).getDataset().getInstIc();
+                emergencyUc += svPacketList.get(i).getDataset().getInstUc();
                 counterc += 1;
                 kzName += "C";
             }
             if(svPacketList.get(i).getDataset().getInstIn() > currentsNormal.get(3))
             {
                 emergencyIn += svPacketList.get(i).getDataset().getInstIn();
+                emergencyUn += svPacketList.get(i).getDataset().getInstUn();
                 countern += 1;
                 kzName += "N";
             }
-
-            if(svPacketList.get(i).getDataset().getInstUa() > currentsNormal.get(4))
-            {
-                emergencyUa += svPacketList.get(i).getDataset().getInstUa();
-                counterua += 1;
-            }
-            if(svPacketList.get(i).getDataset().getInstUb() > currentsNormal.get(5))
-            {
-                emergencyUb += svPacketList.get(i).getDataset().getInstUb();
-                counterub += 1;
-            }
-            if(svPacketList.get(i).getDataset().getInstUc() > currentsNormal.get(6))
-            {
-                emergencyUc += svPacketList.get(i).getDataset().getInstUc();
-                counteruc += 1;
-            }
-            if(svPacketList.get(i).getDataset().getInstUn() > currentsNormal.get(7))
-            {
-                emergencyUn += svPacketList.get(i).getDataset().getInstUn();
-                counterun += 1;
-            }
-
-            svPacketList.get(i).setKz(kzName);
+            kzType.add(i, kzName);
         }
+
         currentsEmergency.add(emergencyIa/countera);
         currentsEmergency.add(emergencyIb/counterb);
         currentsEmergency.add(emergencyIc/counterc);
         currentsEmergency.add(emergencyIn/countern);
 
-        currentsEmergency.add(emergencyUa/counterua);
-        currentsEmergency.add(emergencyUb/counterub);
-        currentsEmergency.add(emergencyUc/counteruc);
-        currentsEmergency.add(emergencyUn/counterun);
+        currentsEmergency.add(emergencyUa/countera);
+        currentsEmergency.add(emergencyUb/counterb);
+        currentsEmergency.add(emergencyUc/counterc);
+        currentsEmergency.add(emergencyUn/countern);
 
         return currentsEmergency;
     }
@@ -159,6 +142,9 @@ public class KzCalculator {
         double startCounter = 0;
         double endCounter = 0;
         List<Double[]> emergencyTime = new ArrayList<>();
+
+
+
         for (int i = 1; i < svPacketList.size(); i++) {
             if((svPacketList.get(i).getKz() != "") & (svPacketList.get(i-1).getKz() == "")){
                 startCounter = i;
